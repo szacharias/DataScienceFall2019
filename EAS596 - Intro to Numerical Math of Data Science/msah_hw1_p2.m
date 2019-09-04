@@ -1,17 +1,34 @@
  
 format long
-clc
-clear
+clc 
 
-x = pi/ 3 
-h = logspace(-16 ,  -1 )
-n = length(h)
+% Variable
+x = pi/ 3 ;
+stepSize = logspace(-16 ,  -1 );
+stepSizeLength = length(stepSize) ; 
+
+minError = 1 ;
+stepSizeOutput = 0 ;
 
 
-for q = 1 : n  
-    functionF(q) = ( sin(x + h(q)) - sin(x)) / h(q) ;
-    O(q) = abs(cos(x) -  functionF(q));
+% Solve
+for stepsIteration = 1 : stepSizeLength 
+    
+    functionF(stepsIteration) = ( sin(x + stepSize(stepsIteration)) - sin(x)) / stepSize(stepsIteration) ;
+    O(stepsIteration) = abs(cos(x) -  functionF(stepsIteration)); 
+    
+    % Show min Error
+    if minError > O(stepsIteration)
+        minError = O(stepsIteration);
+        stepSizeOutput = stepSize(stepsIteration);
+    end
     
 end
 
-loglog(h , O)
+% Plot
+loglog(stepSize , O)
+xlabel('Step Sizes H')
+ylabel('Error Rate O(h)')
+ 
+fprintf('Minimum Error is %d' , minError) 
+fprintf('\nBest StepSize %d\n' , stepSizeOutput)
