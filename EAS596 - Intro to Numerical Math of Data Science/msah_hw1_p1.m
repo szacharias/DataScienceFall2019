@@ -27,7 +27,7 @@ for iteration = 1 : iterationLimit
     
     % Ending Criteria - Error Tolerance
     if abs(endingRange - startingRange ) < errorTolerance
-       fprintf("Q1 Success")
+       fprintf("Success")
        nIters = iteration
        root = (endingRange + startingRange )/ 2  
        break; 
