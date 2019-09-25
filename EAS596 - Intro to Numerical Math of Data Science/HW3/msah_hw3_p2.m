@@ -54,6 +54,9 @@ while  foundReturn ==0 & length < 20
     
         
 end
+if length > 20 & foundReturn ==0
+    error("No Found Path after 20 iterations")
+end
 
 length
 
