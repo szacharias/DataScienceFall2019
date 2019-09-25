@@ -49,7 +49,7 @@ while  foundReturn ==0 & length < 20
     if tempMatrix(i , j) ~= 0 
         foundReturn = 1; 
     else
-        tempMatrix = tempMatrix * A;
+        tempMatrix = tempMatrix * A
     end
     
         

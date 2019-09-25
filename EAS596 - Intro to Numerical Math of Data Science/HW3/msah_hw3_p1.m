@@ -51,10 +51,10 @@ Part3B = [[7];...
 % === Variables End ===
 
 
-%[x0,x1,x2,x3] = findEachXs([Part1A,Part1B])
+[x0,x1,x2,x3] = findEachXs([Part1A,Part1B])
 
 
-%[x0,x1,x2,x3] = findEachXs([Part2A, Part2B])
+[x0,x1,x2,x3] = findEachXs([Part2A, Part2B])
 
 
 [x0,x1,x2,x3] = findEachXs([Part3A, Part3B])
