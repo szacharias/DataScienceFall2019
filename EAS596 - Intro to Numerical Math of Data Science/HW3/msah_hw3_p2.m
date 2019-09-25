@@ -42,8 +42,8 @@ end
 
 
 % === While Loop === 
-% if no answer go into while
-% times matrix A to A to get i+1 steps 
+% if no answer for step 1 go into while
+% times matrix tempMatrix to A to get i+1 steps 
 while  foundReturn ==0 & length < 20
     length = length + 1;
     if tempMatrix(i , j) ~= 0 
@@ -54,9 +54,13 @@ while  foundReturn ==0 & length < 20
     
         
 end
+
+
+% Error Message
 if length > 20 & foundReturn ==0
     error("No Found Path after 20 iterations")
 end
 
+% Verify Answer
 length
 
