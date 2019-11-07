@@ -1,7 +1,7 @@
 library(MASS)
 library(bestglm)
 library(class)
-
+ 
 data_2_a = data_2[ ,which(names(data_2) %in% c("V5","V6","V7","V8","V9","V10"))]
 pairs(data_2_a[1:5])
 cols <- character(nrow(data_2_a))
