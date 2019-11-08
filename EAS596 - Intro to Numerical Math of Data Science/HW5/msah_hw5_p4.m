@@ -1,12 +1,12 @@
 
 
 
-bot_range = 2
-top_range = 10
-difference = top_range - bot_range + 2
+bot_range = 2;
+top_range = 10;
+difference = top_range - bot_range + 2;
 
 % init
-matrix_size = zeros(difference)
+matrix_size = zeros(difference);
 p3a_lst = zeros(difference);
 p3b_lst = zeros(difference);
 og_lst = zeros(difference);
@@ -46,14 +46,14 @@ end
 
 function produce_graphs(p3a_lst, p3b_lst ,og_lst, matrix_size)
 
-hold on
 semilogy(  p3a_lst );
+hold on
 semilogy( p3b_lst) ;
 semilogy(og_lst ) ;
 title("||Q transpose Q - I || versus matrix size ")
 xlabel(' Matrix Size');
 ylabel(' norm of Q transpose * Q - I'); 
-%legend('p3a_lst' , 'p3b_lst' , 'og_lst')
+legend('p3a_lst' , 'p3b_lst' , 'og_lst')
 
 hold off
 

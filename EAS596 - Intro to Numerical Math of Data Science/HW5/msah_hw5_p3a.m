@@ -1,53 +1,27 @@
 function [Q,R] = msah_hw5_p3a(A) 
 
-% object_matrix = A;
-% [m, n ] = size(object_matrix);
-% 
-% R = zeros(n , n )
-% Q = zeros(m , n )
-% 
-% 
-% for q = 1:n
-%    x = object_matrix(:, q);
-%    for w = 1 : q - 1
-%        R(w, q) = Q(: , w)' * x;
-%    end
-%    
-%    for w = 1 : q - 1
-%         x = x- R( w , q ) * Q(:,w );
-%    end
-%    
-%    R(q, q) = norm(x);
-%    
-%    Q(:,q) = x / R(q , q )
-%    
-% end
+object_matrix = A;
+[m, n ] = size(object_matrix);
 
-
-
-object_matrix = A
-
-[m,n] = size(object_matrix);
-m
-n
-Q = zeros(m,n);
-R = zeros(n,n);
+R = zeros(n , n );
+Q = zeros(m , n );
 
 
 for q = 1:n
-    
-    v = object_matrix(:,q);
-    
-    for w = 1:q-1
-        
-        R(w,q) = Q(:,w)' * object_matrix(:,q);
-        v = v - R(w,q) * Q(:,w);
-        
-    end
-    
-    R(q,q) = norm(v);
-    Q(:,q) = v/R(q,q);    
-        
+   x = object_matrix(:, q);
+   for w = 1 : q - 1
+       R(w, q) = Q(: , w)' * x;
+   end
+   
+   for w = 1 : q - 1
+        x = x- R( w , q ) * Q(:,w );
+   end
+   
+   R(q, q) = norm(x);
+   
+   Q(:,q) = x / R(q , q );
+   
 end
+ 
 
 end
