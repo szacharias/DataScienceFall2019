@@ -27,7 +27,6 @@ for i=  bot_range:top_range
      
     % Plot kQ T Q − Ik versus matrix size on a semilogy plot for
     % each method and comment on your results.
-    i
     matrix_size(i) = i ;
     p3a_lst(i) = semi_value(aQ);
     p3b_lst(i) = semi_value(bQ);
@@ -47,14 +46,14 @@ end
 
 function produce_graphs(p3a_lst, p3b_lst ,og_lst, matrix_size)
 
-hold all
+hold on
 semilogy(  p3a_lst );
 semilogy( p3b_lst) ;
 semilogy(og_lst ) ;
 title("||Q transpose Q - I || versus matrix size ")
 xlabel(' Matrix Size');
 ylabel(' norm of Q transpose * Q - I'); 
-legend('p3a_lst' , 'p3b_lst' , 'og_lst')
+%legend('p3a_lst' , 'p3b_lst' , 'og_lst')
 
 hold off
 
