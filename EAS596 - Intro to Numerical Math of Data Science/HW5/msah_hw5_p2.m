@@ -9,7 +9,7 @@ end_range_10s = 3;
  
 
 % replace this with  
-y = ceil(logspace(start_range_10s,end_range_10s, matrix_sizes) )
+y = ceil(logspace(start_range_10s,end_range_10s, matrix_sizes) );
 
 
 %loglog(y)
@@ -18,17 +18,15 @@ time_elapsed_lst = zeros(1,matrix_sizes);
 reletive_n_size = zeros(1,matrix_sizes);
 
 
-for i = 1:length(y) 
-    y(i)
-    n = y(i)
+for i = 1:length(y)  
+    n = y(i);
     A = rand(n,n)+n*eye(n);
     tic;
     msah_hw5_p1(A);  
     time_elapsed_lst(i) = toc;
     reletive_n_size(i)= n;
 end
-
-reletive_n_size
+ 
 % Loglog plots
 loglog( reletive_n_size , time_elapsed_lst);
 hold on ;
