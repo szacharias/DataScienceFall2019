@@ -1,4 +1,5 @@
 function [Q,R] = msah_hw5_p3a(A) 
+format short
 
 object_matrix = A;
 [m, n ] = size(object_matrix);
@@ -23,5 +24,18 @@ for q = 1:n
    
 end
  
+   Q;
+   R;
 
 end
+
+
+% A = [
+%     1 2 3 ,
+%     4 5 6 ,
+%     7 8 9 ,
+%     4 3 2 ,
+%     4 2 2 
+% 
+% ]
+

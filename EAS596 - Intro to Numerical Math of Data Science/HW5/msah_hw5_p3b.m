@@ -19,6 +19,8 @@ for q = 1 : n
     R( q , q ) = norm(x);
     Q(:, q) = x / R(q ,q);
 end
- 
+    format short
+    Q;
+    R;
 
 end

@@ -1,0 +1,47 @@
+
+filename = "UB.png";
+rank = 100;
+
+
+img_filename = imread(filename);  
+% imshow(img_filename);
+
+double_value_filename = double(img_filename);
+
+
+[m , n , c ] = size(img_filename);
+
+
+
+R = double_value_filename( : , : , 1 ) ;
+G = double_value_filename( : , : , 2 ) ;
+B = double_value_filename( : , : , 3 ) ;
+
+
+
+
+[ uR ,sR, vR ] = svd(R);
+[ uG ,sG, vG ] = svd(G);
+[ uB ,sB, vB ] = svd(B);
+ 
+
+
+
+SR( rank+1 : m , : ) = 0 ;
+SR( : , rank+1 : n ) = 0 ;
+
+SG(rank+1: m , : ) = 0 ;
+SG( : , rank+1 : n ) = 0 ;
+
+SB(rank+1: m , : ) = 0 ;
+SB( : , rank+1 : n ) = 0 ;
+
+
+vR = vR';
+vG = vG';
+vB = vB';
+
+
+output_image_r = uR(:, 1:rank) * SR(1:rank+1 , 1: rank+1) * vR(1:rank,:); 
+output_image_r = uR(:, 1:rank) * SR(1:rank+1 , 1: rank+1) * vR(1:rank,:) ;
+output_image_r = uR(:, 1:rank) * SR(1:rank+1 , 1: rank+1) * vR(1:rank,:) 

@@ -30,7 +30,7 @@ end
 % Loglog plots
 loglog( reletive_n_size , time_elapsed_lst);
 hold on ;
-xlabel(' N Size');
+xlabel('Logspace N Size');
 ylabel(' Time Cost'); 
 p = polyfit(reletive_n_size,time_elapsed_lst,1);
 y1 = polyval(p,reletive_n_size); 

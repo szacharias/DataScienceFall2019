@@ -49,6 +49,7 @@ function produce_graphs(p3a_lst, p3b_lst ,og_lst, matrix_size)
 semilogy(  p3a_lst );
 hold on
 semilogy( p3b_lst) ;
+%hold on
 semilogy(og_lst ) ;
 title("||Q transpose Q - I || versus matrix size ")
 xlabel(' Matrix Size');
