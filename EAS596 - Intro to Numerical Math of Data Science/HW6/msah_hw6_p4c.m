@@ -4,9 +4,9 @@ pic1 = "UB.png";
 pic2 = "futurama.png";
 pic3 = "square.png";
 
-pic_list = [pic1, pic2 , pic3]
+pic_list = [pic1, pic2 , pic3];
 
-round_size = size(pic_list, 2)
+round_size = size(pic_list, 2);
 
 for i = 1 : round_size
 

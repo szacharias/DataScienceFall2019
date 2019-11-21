@@ -51,6 +51,7 @@ try
 
     img = cat(3 ,output_image_r , output_image_g, output_image_b); 
     % imshow(img);
+     
 catch 
 %     double_value_filename = rgb2gray(double_value_filename);
     
