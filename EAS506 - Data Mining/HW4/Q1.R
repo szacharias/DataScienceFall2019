@@ -1,4 +1,4 @@
-# install.packages("ElemStatLearn")
+#install.packages("ElemStatLearn")
 library(MASS)
 library(bestglm)
 library(class)
@@ -9,8 +9,7 @@ library(glmnet)
 library(pls)
 library(leaps)
 #1#
-
-set.seed(5509)
+ 
 #read data
 pro_1_train = sample(1:nrow(prostate), nrow(prostate)*0.80)
 pro_1_test = -pro_1_train
@@ -29,7 +28,8 @@ reg_summary$bic
 best_sub = regsubsets(train~.,data = pro_1_train_data,method="exhaustive")
 train_errors = rep(NA,8)
 test_errors = rep(NA,8)
-Y_train=pro_1_train_data[train]
+#Y_train=pro_1_train_data['train']
+Y_train=pro_1_train_data$train
 Y_test=pro_1_test_data$train
 train_pred_matrix = model.matrix(train~., data = pro_1_train_data)
 
@@ -55,7 +55,8 @@ pro_1_test_data = prostate[pro_1_test, ]
 best_sub = regsubsets(train~.,data = pro_1_train_data,method="exhaustive")
 train_errors = rep(NA,8)
 test_errors = rep(NA,8)
-Y_train=pro_1_train_data[train]
+#Y_train=pro_1_train_data[train]
+Y_train=pro_1_train_data$train
 Y_test=pro_1_test_data$train
 train_pred_matrix = model.matrix(train~., data = pro_1_train_data)
 
@@ -111,4 +112,4 @@ for (i in 1:8){
 #5  ( 1 ) " "    " "     "*" "*"  " " "*" "*"     "*"   " " 
 #6  ( 1 ) " "    "*"     "*" "*"  " " "*" "*"     "*"   " " 
 #7  ( 1 ) " "    "*"     "*" "*"  "*" "*" "*"     "*"   " " 
-#8  ( 1 ) "*"    "*"     "*" "*"  "*" "*" "*"     "*"   " " 
+#8  ( 1 ) "*"    "*"     "*" "*"  "*" "*" "*"     "*"   " "
