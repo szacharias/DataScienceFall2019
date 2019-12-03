@@ -19,15 +19,15 @@ prostate
 split_train_test <- function(data){ 
   prostate_training_set = sample(1:nrow(prostate), nrow(prostate)*0.8)
   prostate_testing_set = -prostate_training_set
-  return_list <- list("training" = prostate_training_set, "testing" = pro_1_test_data )
+  return_list <- list("training" = prostate_training_set, "testing" = prostate_testing_set )
   return(return_list)
 }
 
-five_fold_ <- function(prostate_train){
-  
-  best_subset = regsubsets(train~.,data = prostate_train,method="exhaustive")
+five_fold_ <- function(prostate_train, prostate_test){
   train_errors = rep(NA,8)
   test_errors = rep(NA,8) 
+  
+  best_subset = regsubsets(train~.,data = prostate_train,method="exhaustive")
   Y_train=prostate_train$train
   Y_test=prostate_test$train
   train_pred_matrix = model.matrix(train~., data = prostate_train)
@@ -39,28 +39,24 @@ five_fold_ <- function(prostate_train){
     train_errors[i] = mean((Y_train - pred_train)^2)
     pred_test <- test_pred_matrix[,names(coefi)] %*% coefi
     test_errors[i] = mean((Y_test - pred_test)^2)
-  }
-  
-  test_errors
-  
+  } 
   # return_list <- list("target_train" = Y_train , "target_test" = Y_test, "test_errors" = test_errors)
   return_list <- list("test_errors" = test_errors)
   return(test_errors)
   
 }
-
+ 
 ten_fold <- function( prostate){
-  #10-fold
+  train_errors = rep(NA,8)
+  test_errors = rep(NA,8)
   prostate_training_set = sample(1:nrow(prostate), nrow(prostate)*0.90)
   prostate_testing_set = -prostate_training_set
   prostate_train = prostate[prostate_training_set, ]
   prostate_test = prostate[prostate_testing_set, ]
-  best_subset = regsubsets(train~.,data = prostate_train,method="exhaustive")
-  train_errors = rep(NA,8)
-  test_errors = rep(NA,8)
-  #Y_train=prostate_train[train]
   Y_train=prostate_train$train
   Y_test=prostate_test$train
+  
+  best_subset = regsubsets(train~.,data = prostate_train,method="exhaustive") 
   train_pred_matrix = model.matrix(train~., data = prostate_train)
   
   test_pred_matrix = model.matrix(train~., data = prostate_test)
@@ -73,18 +69,11 @@ ten_fold <- function( prostate){
   }
   
   test_errors
-  return(test_errors)
-  #0.2086378 0.2217119 0.2263627 0.2200508 0.2280732 0.2175277 0.2139478 0.2097320
-  #first is the best
-  
-  
+  return(test_errors)  
   
 }
 
 boot_test_error <-function(prostate){
-  #boot
-  best_subset = regsubsets(train~.,data = prostate,method="exhaustive")
-  bss_regression_summary=summary(best_subset)
   beta.fit <- function(X,Y){
     lsfit(X,Y)	
   }
@@ -96,27 +85,28 @@ boot_test_error <-function(prostate){
   sq.error <- function(Y,Yhat){
     (Y-Yhat)^2
   }
+  #boot
+  best_subset = regsubsets(train~.,data = prostate,method="exhaustive")
+  bss_regression_summary=summary(best_subset)
   select = bss_regression_summary$outmat
   error_score <- c()
   for (i in 1:8){
     # Pull out the model
-    temp <- which(select[i,] == "*")
+    temp_data <- which(select[i,] == "*")
     
-    res <- bootpred(prostate[,temp], prostate$train, nboot = 50, theta.fit = beta.fit, theta.predict = beta.predict, err.meas = sq.error) 
-    error_score <- c(error_score, res[[3]])
+    result <- bootpred(prostate[,temp_data], prostate$train, nboot = 50, theta.fit = beta.fit, theta.predict = beta.predict, err.meas = sq.error) 
+    error_score <- c(error_score, result[[3]])
     
   }
   return_list <- list("error_score" = error_score , "bss_regression_summary" = bss_regression_summary)
-  return(return_list)
-  #0.2136327 0.2135156 0.2106268 0.2179330 0.2147731 0.2188589 0.2301666 0.2334832
-  #third one is the best 
+  return(return_list) 
 }
-### ====== 
+### ====== FUNCTION ENDS ==== 
 
 # Split train test 
 split_data_train_test <- split_train_test(prostate)
 prostate_training_set = split_data_train_test$training
-prostate_testing_set = split_train_test$testing
+prostate_testing_set = split_data_train_test$testing
 
 prostate_train = prostate[prostate_training_set, ]
 prostate_test = prostate[prostate_testing_set, ]
@@ -143,7 +133,7 @@ bss_regression_summary$bic
 #1st
 
 
-five_fold_CV_test_error <- five_fold_(prostate_train)
+five_fold_CV_test_error <- five_fold_(prostate_train, prostate_test)
 five_fold_CV_test_error
 # [1] 0.3391230 0.2942332 0.3031100 0.3129720 0.3079543 0.2926718 0.2958197 0.2939711
 #6th

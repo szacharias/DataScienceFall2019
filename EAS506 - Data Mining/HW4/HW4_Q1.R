@@ -19,11 +19,11 @@ prostate
 split_train_test <- function(data){ 
   prostate_training_set = sample(1:nrow(prostate), nrow(prostate)*0.8)
   prostate_testing_set = -prostate_training_set
-  return_list <- list("training" = prostate_training_set, "testing" = pro_1_test_data )
+  return_list <- list("training" = prostate_training_set, "testing" = prostate_testing_set )
   return(return_list)
 }
 
-five_fold_ <- function(prostate_train){
+five_fold_ <- function(prostate_train, prostate_test){
   
   best_subset = regsubsets(train~.,data = prostate_train,method="exhaustive")
   train_errors = rep(NA,8)
@@ -116,7 +116,7 @@ boot_test_error <-function(prostate){
 # Split train test 
 split_data_train_test <- split_train_test(prostate)
 prostate_training_set = split_data_train_test$training
-prostate_testing_set = split_train_test$testing
+prostate_testing_set = split_data_train_test$testing
 
 prostate_train = prostate[prostate_training_set, ]
 prostate_test = prostate[prostate_testing_set, ]
@@ -143,7 +143,7 @@ bss_regression_summary$bic
 #1st
 
 
-five_fold_CV_test_error <- five_fold_(prostate_train)
+five_fold_CV_test_error <- five_fold_(prostate_train, prostate_test)
 five_fold_CV_test_error
 # [1] 0.3391230 0.2942332 0.3031100 0.3129720 0.3079543 0.2926718 0.2958197 0.2939711
 #6th
